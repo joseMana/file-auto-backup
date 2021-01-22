@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace FileAutoBackup
 {
@@ -15,13 +11,11 @@ namespace FileAutoBackup
         public static string fileNameToWatchPath = "MyTextDocument.txt";
         public static string gitCommitMessage => "\"Updated : {DateTime.Now.ToString()}\"";
 
-
         public static string gitCommand { get; set; }
         static void Main(string[] args)
         {
             FileSystemWatcher watcher = new FileSystemWatcher();
             watcher.Path = directoryToWatchPath;
-
 
             watcher.NotifyFilter = 
                 NotifyFilters.LastAccess 
