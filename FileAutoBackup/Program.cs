@@ -7,9 +7,9 @@ namespace FileAutoBackup
 {
     class Program
     {
-        public static string directoryToWatchPath = @"C:\DirectoryToWatch";
-        public static string fileNameToWatchPath = "MyTextDocument.txt";
-        public static string gitCommitMessage => "\"Updated : {DateTime.Now.ToString()}\"";
+        public static string directoryToWatchPath = @"C:\Users\JosephM\AppData\Local\Google\Chrome\User Data\Default";
+        public static string fileNameToWatchPath = "Bookmarks";
+        public static string gitCommitMessage => $"\"Updated : {DateTime.Now.ToString()}\"";
 
         public static string gitCommand { get; set; }
         static void Main(string[] args)
@@ -39,11 +39,13 @@ namespace FileAutoBackup
 
         private static void OnChanged(object source, FileSystemEventArgs e)
         {
+            Thread.Sleep(60000);
             RunCommitBatchFile();
         }
 
         private static void OnRenamed(object source, RenamedEventArgs e)
         {
+            Thread.Sleep(60000);
             RunCommitBatchFile();
         }
 
@@ -62,6 +64,7 @@ namespace FileAutoBackup
             cmd.StandardInput.WriteLine($"cd {directoryToWatchPath}");
             cmd.StandardInput.WriteLine($"git add {fileNameToWatchPath}");
             cmd.StandardInput.WriteLine($"git commit -m {gitCommitMessage}");
+            cmd.StandardInput.WriteLine($"git push");
 
             cmd.StandardInput.Flush();
             cmd.StandardInput.Close();
